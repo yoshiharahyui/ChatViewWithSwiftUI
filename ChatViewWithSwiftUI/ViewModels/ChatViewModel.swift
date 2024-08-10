@@ -14,17 +14,20 @@ class ChatViewModel {
         let fileName = "chatData.json"
         let data: Data
         
+        //ファイルのパスの取得
         guard let filePath = Bundle.main.url(forResource: fileName, withExtension: nil)
         else {
             fatalError("\(fileName)が見つかりませんでした")
         }
         
+        //データの取得
         do {
             data = try Data(contentsOf: filePath)
         } catch {
             fatalError("\(fileName)のロードに失敗しました")
         }
         
+        //swiftで使用できるデータ形式に変換する
         do {
             return try JSONDecoder().decode([Chat].self, from: data)
         } catch {
