@@ -9,6 +9,17 @@ import Foundation
 
 //データ処理のためのクラス
 class ChatViewModel {
+    //戻り値の[Chat]データを格納するプロパティ
+    var chatData: [Chat] = []
+    var messages: [Message] = []
+    
+    //ChatViewModelが初期化された時に実行される
+    init() {
+        //fetchChatDataの戻り値が代入される
+        chatData = fetchChatData()
+        messages = chatData[0].messages
+        print(messages)
+    }
     
     private func fetchChatData() -> [Chat] {
         let fileName = "chatData.json"
