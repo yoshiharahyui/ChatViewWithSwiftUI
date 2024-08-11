@@ -46,7 +46,9 @@ extension MessageRow {
     private var messageState: some View {
         VStack(alignment: .trailing) {
             Spacer()
-            Text("既読")
+            if message.readed {
+                Text("既読")
+            }
             Text(formattedDataString)
         }
         .foregroundColor(.secondary)
@@ -55,7 +57,9 @@ extension MessageRow {
     
     private var formattedDataString: String {
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter.string(from: Date())
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = formatter.date(from: message.date) else { return "" }
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
     }
 }
