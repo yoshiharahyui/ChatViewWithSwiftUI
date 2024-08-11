@@ -13,10 +13,17 @@ struct MessageRow: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            userThumb
-            messageText
-            messageState
-            Spacer()
+            
+            if message.user.isCurrentUser {
+                Spacer()
+                messageState
+                messageText
+            } else {
+                userThumb
+                messageText
+                messageState
+                Spacer()
+            }
         }
         .padding(.bottom)
     }
@@ -39,14 +46,15 @@ extension MessageRow {
     private var messageText: some View {
         Text(message.text)
             .padding()
-            .background(.white)
+            .background(message.user.isCurrentUser ? Color("Bubble") : Color(uiColor: .tertiarySystemBackground))
+            .foregroundColor(message.user.isCurrentUser ? .black : .primary)
             .cornerRadius(30)
     }
     
     private var messageState: some View {
         VStack(alignment: .trailing) {
             Spacer()
-            if message.readed {
+            if message.user.isCurrentUser && message.readed {
                 Text("既読")
             }
             Text(formattedDataString)
