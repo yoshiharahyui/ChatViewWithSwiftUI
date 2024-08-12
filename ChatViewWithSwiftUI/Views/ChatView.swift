@@ -11,6 +11,8 @@ struct ChatView: View {
     
     @State private var textFieldText: String = ""
     @FocusState private var textFieldFocused: Bool
+    //遷移元に戻るためのコード
+    @Environment(\.dismiss) private var dismiss
     
     @ObservedObject var vm: ChatViewModel = ChatViewModel()
     
@@ -86,8 +88,14 @@ extension ChatView {
     
     private var navigationArea: some View {
         HStack {
-            Image(systemName: "chevron.backward")
-                .font(.title2)
+            Button {
+                //上で定義したdismissを使う
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
+                    .font(.title2)
+                    .foregroundColor(.primary)
+            }
             Text("山田太郎")
                 .font(.title2.bold())
             Spacer()
