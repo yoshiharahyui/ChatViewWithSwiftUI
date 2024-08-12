@@ -93,6 +93,6 @@ extension ChatView {
     }
     
     private func sendMessage() {
-        vm.addMessage()
+        vm.addMessage(text: textFieldText)
     }
 }
