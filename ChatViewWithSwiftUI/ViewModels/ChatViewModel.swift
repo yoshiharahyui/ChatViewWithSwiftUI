@@ -18,7 +18,6 @@ class ChatViewModel {
         //fetchChatDataの戻り値が代入される
         chatData = fetchChatData()
         messages = chatData[0].messages
-        print(messages)
     }
     
     private func fetchChatData() -> [Chat] {
@@ -46,4 +45,7 @@ class ChatViewModel {
         }
     }
     
+    func addMessage() {
+        print("データを追加します")
+    }
 }
