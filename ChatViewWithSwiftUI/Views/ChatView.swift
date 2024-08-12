@@ -10,6 +10,9 @@ import SwiftUI
 struct ChatView: View {
     
     @State private var textFieldText: String = ""
+    @FocusState private var textFieldFocused: Bool
+    
+    @ObservedObject var vm: ChatViewModel = ChatViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -30,16 +33,24 @@ struct ChatView: View {
 extension ChatView {
     
     private var messageArea: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                ForEach(0..<15) { _ in
-                    MessageRow()
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(vm.messages) { message in
+                        MessageRow(message: message)
+                    }
                 }
+                .padding(.horizontal)
+                .padding(.top, 72)
             }
-            .padding(.horizontal)
-            .padding(.top, 72)
+            .background(Color("Background"))
+            .onTapGesture {
+                textFieldFocused = false
+            }
+            .onAppear {
+                scrollToLast(proxy: proxy)
+            }
         }
-        .background(.cyan)
     }
     
     private var inputArea: some View {
@@ -61,11 +72,16 @@ extension ChatView {
                         .foregroundColor(.gray)
                     , alignment: .trailing
                 )
+                .onSubmit {
+                    sendMessage()
+                }
+                .focused($textFieldFocused)
             Image(systemName: "mic")
                 .font(.title2)
         }
-        .background(.white)
-        .padding()
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .background(Color(uiColor: .systemBackground))
     }
     
     private var navigationArea: some View {
@@ -83,6 +99,19 @@ extension ChatView {
             .font(.title2)
         }
         .padding()
-        .background(.cyan.opacity(0.9))
+        .background(Color("Background").opacity(0.9))
+    }
+    
+    private func sendMessage() {
+        if !textFieldText.isEmpty {
+            vm.addMessage(text: textFieldText)
+            textFieldText = ""
+        }
+    }
+    
+    private func scrollToLast(proxy: ScrollViewProxy) {
+        if let lastMessage = vm.messages.last {
+            proxy.scrollTo(lastMessage.id, anchor: .bottom)
+        }
     }
 }
