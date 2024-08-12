@@ -8,10 +8,10 @@
 import Foundation
 
 //データ処理のためのクラス
-class ChatViewModel {
+class ChatViewModel: ObservableObject {
     //戻り値の[Chat]データを格納するプロパティ
     var chatData: [Chat] = []
-    var messages: [Message] = []
+    @Published var messages: [Message] = []
     
     //ChatViewModelが初期化された時に実行される
     init() {
@@ -52,5 +52,7 @@ class ChatViewModel {
             user: User.currentUser,
             date: Date().description,
             readed: false)
+        
+        messages.append(newMessage)
     }
 }
