@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E6CEC732C69E769007BD07E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6CEC722C69E768007BD07E /* ListView.swift */; };
 		1EF8026F2C6640BA00A1BBB6 /* ChatViewWithSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF8026E2C6640BA00A1BBB6 /* ChatViewWithSwiftUIApp.swift */; };
 		1EF802732C6640BC00A1BBB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF802722C6640BC00A1BBB6 /* Assets.xcassets */; };
 		1EF802762C6640BC00A1BBB6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF802752C6640BC00A1BBB6 /* Preview Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E6CEC722C69E768007BD07E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		1EF8026B2C6640BA00A1BBB6 /* ChatViewWithSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatViewWithSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF8026E2C6640BA00A1BBB6 /* ChatViewWithSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewWithSwiftUIApp.swift; sourceTree = "<group>"; };
 		1EF802722C6640BC00A1BBB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		1EF8027D2C66435000A1BBB6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E6CEC722C69E768007BD07E /* ListView.swift */,
 				1EF802842C66438200A1BBB6 /* ChatView.swift */,
 				1EF802862C66438800A1BBB6 /* MessageRow.swift */,
 			);
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E6CEC732C69E769007BD07E /* ListView.swift in Sources */,
 				1EF802812C66437000A1BBB6 /* Message.swift in Sources */,
 				1EF802912C6709A600A1BBB6 /* ChatViewModel.swift in Sources */,
 				1EF8026F2C6640BA00A1BBB6 /* ChatViewWithSwiftUIApp.swift in Sources */,
