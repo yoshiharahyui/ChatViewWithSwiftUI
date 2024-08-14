@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ChatView: View {
     
+    let chat: Chat
+    
     @State private var textFieldText: String = ""
     @FocusState private var textFieldFocused: Bool
     //遷移元に戻るためのコード
@@ -28,9 +30,9 @@ struct ChatView: View {
     }
 }
 
-#Preview {
-    ChatView()
-}
+//#Preview {
+//    ChatView()
+//}
 
 extension ChatView {
     
@@ -38,7 +40,7 @@ extension ChatView {
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(spacing: 0) {
-                    ForEach(vm.messages) { message in
+                    ForEach(chat.messages) { message in
                         MessageRow(message: message)
                     }
                 }
