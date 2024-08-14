@@ -53,14 +53,16 @@ extension ListView {
                         ChatView(chat: chat)
                             .toolbar(.hidden)
                     } label: {
-                        listRow
+                        listRow(chat: chat)
                     }
                 }
             }
         }
     }
     
-    private var listRow: some View {
+    //private var listRow: some View {
+    //Chat型のrecentMessageTextにアクセスできるようにプロパティを関数にする
+    private func listRow(chat: Chat) -> some View {
         HStack {
             Image("user03")
                 .resizable()
@@ -69,7 +71,7 @@ extension ListView {
             VStack(alignment: .leading) {
                 Text("タイトル")
                     .foregroundColor(.primary)
-                Text("最新のメッセージ")
+                Text(chat.recentMessageText)
                     .font(.footnote)
                     .foregroundColor(Color(uiColor: .secondaryLabel))
             }

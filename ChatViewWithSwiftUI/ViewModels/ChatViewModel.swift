@@ -11,6 +11,7 @@ import Foundation
 class ChatViewModel: ObservableObject {
     //戻り値の[Chat]データを格納するプロパティ
     var chatData: [Chat] = []
+    //このプロパティラッパーは、値が変更されるたびに通知を発行します
     @Published var messages: [Message] = []
     
     //ChatViewModelが初期化された時に実行される
