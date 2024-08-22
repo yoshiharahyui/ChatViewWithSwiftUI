@@ -9,10 +9,15 @@ import SwiftUI
 
 struct ChatView: View {
     
+    let chat: Chat
+    
     @State private var textFieldText: String = ""
     @FocusState private var textFieldFocused: Bool
-    
-    @ObservedObject var vm: ChatViewModel = ChatViewModel()
+    //遷移元に戻るためのコード
+    @Environment(\.dismiss) private var dismiss
+    //このプロパティラッパーを使用すると、ビューモデル内の @Published プロパティの変更を監視し、それに応じてビューを自動的に更新できます
+    @EnvironmentObject var vm: ChatViewModel
+    //@ObservedObject var vm: ChatViewModel = ChatViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -26,9 +31,9 @@ struct ChatView: View {
     }
 }
 
-#Preview {
-    ChatView()
-}
+//#Preview {
+//    ChatView()
+//}
 
 extension ChatView {
     
@@ -36,7 +41,7 @@ extension ChatView {
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(spacing: 0) {
-                    ForEach(vm.messages) { message in
+                    ForEach(chat.messages) { message in
                         MessageRow(message: message)
                     }
                 }
@@ -86,8 +91,14 @@ extension ChatView {
     
     private var navigationArea: some View {
         HStack {
-            Image(systemName: "chevron.backward")
-                .font(.title2)
+            Button {
+                //上で定義したdismissを使う
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
+                    .font(.title2)
+                    .foregroundColor(.primary)
+            }
             Text("山田太郎")
                 .font(.title2.bold())
             Spacer()
@@ -104,7 +115,7 @@ extension ChatView {
     
     private func sendMessage() {
         if !textFieldText.isEmpty {
-            vm.addMessage(text: textFieldText)
+            vm.addMessage(chatID: chat.id, text: textFieldText)
             textFieldText = ""
         }
     }
