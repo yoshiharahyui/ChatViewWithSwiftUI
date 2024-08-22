@@ -16,7 +16,8 @@ struct ChatView: View {
     //遷移元に戻るためのコード
     @Environment(\.dismiss) private var dismiss
     //このプロパティラッパーを使用すると、ビューモデル内の @Published プロパティの変更を監視し、それに応じてビューを自動的に更新できます
-    @ObservedObject var vm: ChatViewModel = ChatViewModel()
+    @EnvironmentObject var vm: ChatViewModel
+    //@ObservedObject var vm: ChatViewModel = ChatViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -114,7 +115,7 @@ extension ChatView {
     
     private func sendMessage() {
         if !textFieldText.isEmpty {
-            vm.addMessage(text: textFieldText)
+            vm.addMessage(chatID: chat.id, text: textFieldText)
             textFieldText = ""
         }
     }

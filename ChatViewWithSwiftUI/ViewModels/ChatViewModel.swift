@@ -10,7 +10,7 @@ import Foundation
 //データ処理のためのクラス
 class ChatViewModel: ObservableObject {
     //戻り値の[Chat]データを格納するプロパティ
-    var chatData: [Chat] = []
+    @Published var chatData: [Chat] = []
     //このプロパティラッパーは、値が変更されるたびに通知を発行します
     @Published var messages: [Message] = []
     
@@ -46,7 +46,12 @@ class ChatViewModel: ObservableObject {
         }
     }
     
-    func addMessage(text: String) {
+    func addMessage(chatID: String, text: String) {
+        
+        guard let index = chatData.firstIndex(where: { chat in
+            chat.id == chatID
+        }) else { return }
+        
         let newMessage = Message(
             id: UUID().uuidString,
             text: text,
@@ -54,6 +59,6 @@ class ChatViewModel: ObservableObject {
             date: Date().description,
             readed: false)
         
-        messages.append(newMessage)
+        chatData[index].messages.append(newMessage)
     }
 }

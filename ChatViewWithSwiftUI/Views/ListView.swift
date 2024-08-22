@@ -51,6 +51,7 @@ extension ListView {
                 ForEach(vm.chatData) { chat in
                     NavigationLink {
                         ChatView(chat: chat)
+                            .environmentObject(vm)
                             .toolbar(.hidden)
                     } label: {
                         listRow(chat: chat)
@@ -76,7 +77,7 @@ extension ListView {
                     .foregroundColor(Color(uiColor: .secondaryLabel))
             }
             Spacer()
-            Text("12/31")
+            Text(chat.recentMessageDateString)
                 .font(.caption)
                 .foregroundColor(Color(uiColor: .secondaryLabel))
         }
